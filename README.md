@@ -31,4 +31,7 @@ it will make a directory named `build` then cd into it and run `ninja` command t
 
 Then there is `com.github.aharotias2.Monooki` that is the final result of this process.
 Copy it some location where included in the `PATH` environmental variable for installation.
+
+I recommend you to register this command in your crontab scheduling list to constantly backup your important files.
+
 Good luck.
