@@ -14,9 +14,12 @@ Same as the cp and rsync commands.
 
 Copy the directories dirA, dirB, and dirC to the destination directory.
 
-If a file with the same name already exists, it will not be overwritten unless it has been updated。
+If a file with the same name already exists, this app will not overwrite them unless it has been updated.
 
-You can specify the backup source by writing the path to the file with the -i option.
+If you have deleted files at source locations that were already backed up,
+it will put a suffix “#deleted#” to the name of files at the destination location.
+
+You can specify the backup sources with a file that contains location paths.
 
 The --dry-run option only prints stdout the filename to be copied without doing the actual copy.
 
@@ -34,4 +37,4 @@ Copy it some location where included in the `PATH` environmental variable for in
 
 I recommend you to register this command in your crontab scheduling list to constantly backup your important files.
 
-Good luck.
+Good luck!
