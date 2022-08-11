@@ -116,15 +116,30 @@ public class GeeListUtils {
  * determine whether it is a directory or not, or get the modification time.
  */
 public class FileWrapper : Object {
-    public string relative_path { get; private set; }
-    public File file { get; private set; }
-    public FileType file_type { get; private set; }
-    public FileInfo? info { get; private set; }
-    public File? parent { get; private set; }
-
-    private bool is_dry_run = false;
-
-    private FileInfo? parent_info;
+    public string relative_path {
+        get;
+        private set;
+    }
+    
+    public File file {
+        get;
+        private set;
+    }
+    
+    public FileType file_type {
+        get;
+        private set;
+    }
+    
+    public FileInfo? info {
+        get;
+        private set;
+    }
+    
+    public File? parent {
+        get;
+        private set;
+    }
 
     public bool exists {
         get {
@@ -194,7 +209,11 @@ public class FileWrapper : Object {
             return info.get_attribute_string("owner::user");
         }
     }
-        
+
+    private bool is_dry_run = false;
+
+    private FileInfo? parent_info;
+
     public FileWrapper() {}
     
     public FileWrapper.from_file(File file, bool is_dry_run = false) throws AppError {
@@ -318,10 +337,29 @@ public class Monooki : Object {
     private FileWrapper destination;
     private Gee.List<FileWrapper> sources;
     
-    public bool is_mark_deleted_files { get; set; default = true; }
-    public bool is_dry_run { get; set; default = true; }
-    public bool ignore_symlinks { get; set; default = false; }
-    public bool has_log_file { get; set; default = false; }
+    public bool is_mark_deleted_files {
+        get;
+        set;
+        default = true;
+    }
+    
+    public bool is_dry_run {
+        get;
+        set;
+        default = true;
+    }
+    
+    public bool ignore_symlinks {
+        get;
+        set;
+        default = false;
+    }
+    
+    public bool has_log_file {
+        get;
+        set;
+        default = false;
+    }
     
     /**
      * コンストラクタ
@@ -799,18 +837,17 @@ public class MonookiApplication : Application {
         }
         return true;
     }
-
-    /**
-     * This is the entry pooint
-     * that create MonookiApplication and execute ``run'' method.
-     */
-    public static int main(string[] args) {
-        // At first set up a print handler
-        // because normal ``print'' method will print utf8 strings incorrectly.
-        GLib.set_print_handler((text) => stdout.puts(text));
-        GLib.set_printerr_handler((text) => stdout.puts(text));
-        debug("%s Hello", APP_ID);
-        return new MonookiApplication().run(args);
-    }
 }
 
+/**
+ * This is the entry pooint
+ * that create MonookiApplication and execute ``run'' method.
+ */
+int main(string[] args) {
+    // At first set up a print handler
+    // because normal ``print'' method will print utf8 strings incorrectly.
+    GLib.set_print_handler((text) => stdout.puts(text));
+    GLib.set_printerr_handler((text) => stdout.puts(text));
+    debug("%s Hello", APP_ID);
+    return new MonookiApplication().run(args);
+}
